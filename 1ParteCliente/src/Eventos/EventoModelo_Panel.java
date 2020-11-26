@@ -8,16 +8,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Interfaz.Ventana_Usuario;
+
 public class EventoModelo_Panel extends MouseAdapter{
 
 	JTable tabla;
 	DefaultTableModel modelocesta;
-	
-	public EventoModelo_Panel(JTable tabla,DefaultTableModel modelocesta) {
+	Ventana_Usuario  ventana;
+	public EventoModelo_Panel(JTable tabla,Ventana_Usuario ventana) {
 		// TODO Auto-generated constructor stub
-		
+		this.ventana=ventana;
 		this.tabla=tabla;
-		this.modelocesta=modelocesta;
+		this.modelocesta=ventana.getModelo();
 				
 	}
 	
@@ -33,17 +35,21 @@ public class EventoModelo_Panel extends MouseAdapter{
 		
 	
 		int quefilahay;
-		
+	
 		if(cantidad!=null) {
 			
 			quefilahay=buscaSiyaexiste(nombre);// buscar si ya exite en cesta o no
 											//en caso de no añadir una fila nueva
-			// si existe añadir cantidad de comida en esta fila
+			// si existe añadir cantidad de comida a esta fila
 			
 			if(quefilahay==-1) {
 			
 				String[] st={nombre,precio,cantidad};
 				modelocesta.addRow(st);
+				
+				// sumar los precio de la cesta
+				ventana.getTotal().setText(String.valueOf(sumaTotal()));
+				
 			}
 			else {
 				
@@ -54,6 +60,9 @@ public class EventoModelo_Panel extends MouseAdapter{
 				int suma=ca+cantidadCesta;
 				
 				modelocesta.setValueAt(suma, quefilahay,2);
+				
+				// sumar los precio de la cesta
+				ventana.getTotal().setText(String.valueOf(sumaTotal()));
 				
 			}
 		
@@ -89,7 +98,7 @@ public class EventoModelo_Panel extends MouseAdapter{
 		for(int i=0;i<modelocesta.getRowCount();i++) {
 			
 			
-			if(nombre.equals(modelocesta.getValueAt(i, 0))){
+			if(nombre.equals(modelocesta.getValueAt(i, 0).toString())){
 			
 				
 				return i;
@@ -99,6 +108,27 @@ public class EventoModelo_Panel extends MouseAdapter{
 		
 		return -1;
 	}
+	
+	
+	
+		
+	public double sumaTotal() {
+		
+		
+		double total=0;
+		
+		for(int i=0;i<modelocesta.getRowCount();i++) {
+			
+			double precio=Double.parseDouble(modelocesta.getValueAt(i, 1).toString());
+			
+			int cantidad=Integer.parseInt(modelocesta.getValueAt(i, 2).toString());
+			
+			total=total+(precio*cantidad);
+			}
+			
+		
+		return total;
+		}
 	
 	
 }

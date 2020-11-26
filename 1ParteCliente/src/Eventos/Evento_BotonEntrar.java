@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.undo.CannotUndoException;
 
 import Controlador.Usuario;
 import Interfaz.Panel_Entrar;
 import Interfaz.Ventana_Usuario;
+import ValorFijo.cuentaUsuario;
 
 
 public class Evento_BotonEntrar implements ActionListener{
@@ -34,8 +36,8 @@ public class Evento_BotonEntrar implements ActionListener{
 		if(buscaUsuario()) {// solo en caso si existe cuenta de usuario y es correcto su contraseña 
 	
 			frame.setVisible(false);
-				
-		
+			
+			cuentaUsuario.cuenta=usuario;
 			Ventana_Usuario ventan=new Ventana_Usuario();
 			
 		}

@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controlador.AndairAtabla;
 import Controlador.InicarModeloDeTabla;
+import Eventos.EventoPanelTermina;
 import Eventos.EventoTablaCesta;
 import Eventos.EventoVentanaPrincipal;
 import ValorFijo.NombreFijo;
@@ -16,8 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import java.awt.Font;
+import java.awt.Color;
 
-public class Ventana_Usuario  extends JFrame {
+public class Ventana_Usuario    extends JFrame {
 	
 	
 	JTable tablaCesta;
@@ -25,8 +27,12 @@ public class Ventana_Usuario  extends JFrame {
 	JLabel Total;
 	
 	
+
+
 	public Ventana_Usuario() {
 		
+		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		  String st[]=	new String[] {
 					
@@ -38,18 +44,24 @@ public class Ventana_Usuario  extends JFrame {
 		setBounds(100, 100, 742, 412);
 		getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(344, 10, 142, 355);
-		getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel panelmedia = new JPanel();
+		panelmedia.setBounds(344, 10, 142, 355);
+		getContentPane().add(panelmedia);
+		panelmedia.setLayout(null);
 		
 		JButton btnPedir = new JButton("Pedir");
 		btnPedir.setBounds(21, 69, 97, 23);
-		panel.add(btnPedir);
+		panelmedia.add(btnPedir);
 		
-		Total = new JLabel("New label");
-		Total.setBounds(41, 193, 58, 15);
-		panel.add(Total);
+		Total = new JLabel("");
+		Total.setFont(new Font("宋体", Font.PLAIN, 26));
+		Total.setBounds(21, 196, 85, 45);
+		panelmedia.add(Total);
+		
+		JLabel lblTotal = new JLabel("Total");
+		lblTotal.setFont(new Font("宋体", Font.PLAIN, 24));
+		lblTotal.setBounds(31, 148, 74, 38);
+		panelmedia.add(lblTotal);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 10, 334, 355);
@@ -61,7 +73,7 @@ public class Ventana_Usuario  extends JFrame {
 		getContentPane().add(scrollPaneCesta);
 	
 		
-		tablaCesta = new JTable() {
+		tablaCesta = new JTable() {// para que la tabla no se puede modificar
 			
 			@Override
 			public boolean isCellEditable(int row,int colum) {
@@ -72,33 +84,32 @@ public class Ventana_Usuario  extends JFrame {
 		
 		tablaCesta.setModel(modelo);
 		
-	//	tablaCesta.setEnabled(false);
 		
 		tablaCesta.editCellAt(1,1) ;
 		
 		scrollPaneCesta.setViewportView(tablaCesta);
 		
 		
-		EventoTablaCesta eventoCesta=new EventoTablaCesta(tablaCesta, modelo);
+		EventoTablaCesta eventoCesta=new EventoTablaCesta(this);
 	
 		tablaCesta .addMouseListener(eventoCesta);
 		
 		
 		AndairAtabla tabla=new AndairAtabla();// va devolver DefaultTableModel
+		
+		
+		Modelo_Panel verdura=new Modelo_Panel(tabla.BucarSeguncategoira(NombreFijo.verdura),this);
+		tabbedPane.addTab("Verdura",verdura);
+		
+		Modelo_Panel bebida=new Modelo_Panel(tabla.BucarSeguncategoira(NombreFijo.bebida),this);
+		tabbedPane.addTab("Bebida",bebida);
 		//que lleva informacion de comidas 
 		// y con DefaultTableModel crear tablas en distions panels
 		
 		// tabbedPan  va añadir estos panles que contiene tablas de comidas 
-		
-		Modelo_Panel carne=new Modelo_Panel(tabla.BucarSeguncategoira(NombreFijo.carne),modelo);
+
+		Modelo_Panel carne=new Modelo_Panel(tabla.BucarSeguncategoira(NombreFijo.carne),this);
 		tabbedPane.addTab("Carne",carne);
-		
-		
-		Modelo_Panel verdura=new Modelo_Panel(tabla.BucarSeguncategoira(NombreFijo.verdura),modelo);
-		tabbedPane.addTab("Verdura",verdura);
-		
-		Modelo_Panel bebida=new Modelo_Panel(tabla.BucarSeguncategoira(NombreFijo.verdura),modelo);
-		tabbedPane.addTab("Bebida",bebida);
 		
 		
 		
@@ -108,10 +119,70 @@ public class Ventana_Usuario  extends JFrame {
 		getContentPane().add(lblCesta);
 		
 		
-
+	
+		JPanel PanelTermina = new JPanel();
+		PanelTermina.setBounds(0, 0, 718, 365);
+		PanelTermina.setLayout(null);
+		getContentPane().add(PanelTermina);
+		PanelTermina.setVisible(false);
+		
+		//EventoPanelTermina terminada=new EventoPanelTermina(tabbedPane, scrollPaneCesta, panelmedia,  PanelTermina );
+		
+		EventoPanelTermina terminada=new EventoPanelTermina(this,PanelTermina);
+		
+		
+		JLabel textoTermina = new JLabel("Esperando respuesta..");
+		textoTermina.setBounds(100, 100, 309, 112);
+		PanelTermina.add(textoTermina);
+		textoTermina.setFont(new Font("宋体", Font.PLAIN, 18));
+		textoTermina.setForeground(Color.RED);
+		
+		
+		btnPedir.addActionListener(terminada);
+		
 		
 		setVisible(true);
 		
 		addWindowListener(new EventoVentanaPrincipal(this));
+	}
+	
+	
+	
+	
+	public JTable getTablaCesta() {
+		return tablaCesta;
+	}
+
+
+
+
+	public void setTablaCesta(JTable tablaCesta) {
+		this.tablaCesta = tablaCesta;
+	}
+
+
+
+
+	public DefaultTableModel getModelo() {
+		return modelo;
+	}
+
+
+
+
+	public void setModelo(DefaultTableModel modelo) {
+		this.modelo = modelo;
+	}
+
+
+
+
+	public JLabel getTotal() {
+		return Total;
+	}
+
+
+	public void setTotal(JLabel total) {
+		Total = total;
 	}
 }

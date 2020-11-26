@@ -68,11 +68,6 @@ public class Panel_Entrar extends JPanel {
 		 add(registar);
 		
 	
-		JButton botonOlvidarContrasena = new JButton("Olvida contrasena");
-		
-		botonOlvidarContrasena.setBounds(91, 263, 207, 23);
-		
-		 add(botonOlvidarContrasena);
 		
 		TipoUsuario = new JLabel("Cliente");
 		TipoUsuario.setFont(new Font("Traditional Arabic", Font.PLAIN, 28));

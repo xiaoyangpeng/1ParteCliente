@@ -12,7 +12,7 @@ public class Modelo_Panel extends JScrollPane{
 	JTable table;
 	
 	
-	public Modelo_Panel(DefaultTableModel modelo,DefaultTableModel modelocesta) {
+	public Modelo_Panel(DefaultTableModel modelo,Ventana_Usuario ventana) {
 	
 	
 	table = new JTable() {	// asi tabla no se puede modificar
@@ -29,7 +29,7 @@ public class Modelo_Panel extends JScrollPane{
 	setViewportView(table);
 	
 	
-	EventoModelo_Panel ranton=new EventoModelo_Panel(table,modelocesta);
+	EventoModelo_Panel ranton=new EventoModelo_Panel(table,ventana);
 	
 	
 	table.addMouseListener(ranton);
