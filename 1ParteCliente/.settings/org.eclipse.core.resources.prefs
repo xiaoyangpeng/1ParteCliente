@@ -4,5 +4,7 @@ encoding//src/Controlador/Usuario.java=UTF-8
 encoding//src/Eventos/EventoBotonRegistrar.java=UTF-8
 encoding//src/Eventos/EventoModelo_Panel.java=UTF-8
 encoding//src/Eventos/Evento_BotonEntrar.java=UTF-8
+encoding//src/Eventos/HiloBuscaSiEnvia.java=UTF-8
+encoding//src/Interfaz/VentanaPrincipal.java=UTF-8
 encoding//src/Interfaz/VentanaRegistrar.java=UTF-8
 encoding//src/Interfaz/Ventana_Usuario.java=UTF-8

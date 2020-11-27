@@ -26,7 +26,7 @@ public class Ventana_Usuario    extends JFrame {
 	DefaultTableModel modelo;
 	JLabel Total;
 	
-	
+	JLabel textoTermina;
 
 
 	public Ventana_Usuario() {
@@ -131,7 +131,7 @@ public class Ventana_Usuario    extends JFrame {
 		EventoPanelTermina terminada=new EventoPanelTermina(this,PanelTermina);
 		
 		
-		JLabel textoTermina = new JLabel("Esperando respuesta..");
+		textoTermina = new JLabel("Esperando respuesta..");
 		textoTermina.setBounds(100, 100, 309, 112);
 		PanelTermina.add(textoTermina);
 		textoTermina.setFont(new Font("宋体", Font.PLAIN, 18));
@@ -149,6 +149,20 @@ public class Ventana_Usuario    extends JFrame {
 	
 	
 	
+	public JLabel getTextoTermina() {
+		return textoTermina;
+	}
+
+
+
+
+	public void setTextoTermina(JLabel textoTermina) {
+		this.textoTermina = textoTermina;
+	}
+
+
+
+
 	public JTable getTablaCesta() {
 		return tablaCesta;
 	}

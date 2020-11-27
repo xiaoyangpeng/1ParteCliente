@@ -20,15 +20,12 @@ public class BBDD_pedido {
 	ResultSet resultado=null;
 	String usuario;
 	
-	public  BBDD_pedido() {
+	public  BBDD_pedido() throws SQLException {
 		// TODO Auto-generated constructor stub
 		
-		try {
+		
 			conexion=DriverManager.getConnection(BBDD.url);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	
 public int buscarultimoID() {

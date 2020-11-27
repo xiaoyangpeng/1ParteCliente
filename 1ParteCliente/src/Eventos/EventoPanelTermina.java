@@ -21,14 +21,6 @@ public class EventoPanelTermina implements ActionListener{
 	JPanel panelterminad;
 	Ventana_Usuario ventana;
 	
-	/*public EventoPanelTermina(JTabbedPane tabbePane, JScrollPane scroll,JPanel panelmedia,JPanel panelterminad) {
-		this.tabbePane = tabbePane;
-		this.scroll = scroll;
-		this.panelmedia=panelmedia;
-		this.panelterminad=panelterminad;
-		
-		
-	}	*/
 	
 	public EventoPanelTermina(Ventana_Usuario ventana,JPanel panelterminada) {
 	
@@ -62,9 +54,23 @@ public class EventoPanelTermina implements ActionListener{
 			panelterminad.setVisible(true);
 			ventana.setContentPane(panelterminad);
 			
+			
 			Pedido pide=new Pedido();
+			
+		
+			
+			// enviar el pedido
+			// luego en parte restaurante utiliza para verttificar 
 			pide.enviarPeido();
 			
+			 
+			// primero envia su comida que esta en cesta
+			pide.enviarComida(ventana.getModelo());
+			
+			
+			HiloBuscaSiEnvia busca=new HiloBuscaSiEnvia(ventana.getTextoTermina());
+			
+			busca.start();
 			
 			
 			}else {

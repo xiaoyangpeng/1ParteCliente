@@ -49,10 +49,14 @@ public class VentanaPrincipal extends JFrame {
 		
 		addWindowListener(new EventoVentanaPrincipal(this));
 		
+		//añadir panel entra a ventana principal
 		Panel_Entrar panelentra=new Panel_Entrar();
 		add(panelentra);
 		
-		
+		// añadir evento a boton entrara
+		// cuadndo el usuario pone bien su nuemero de cuenta y contraseña
+		// esta ventan deja de ser visible 
+		//y activar ventan de usuario
 		Evento_BotonEntrar eventoentra=new Evento_BotonEntrar(this,panelentra);
 		 
 		panelentra.getEntrar().addActionListener(eventoentra);

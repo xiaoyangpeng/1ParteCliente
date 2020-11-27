@@ -17,7 +17,7 @@ public class EventoTablaCesta extends MouseAdapter {
 	DefaultTableModel modelocesta;
 	JTable tabla;
 	Ventana_Usuario  ventana;
-	public EventoTablaCesta(	Ventana_Usuario  ventana) {
+	public EventoTablaCesta(Ventana_Usuario  ventana) {
 		// TODO Auto-generated constructor stub
 		this.ventana=ventana;
 		this.tabla=ventana.getTablaCesta();
@@ -34,16 +34,18 @@ public class EventoTablaCesta extends MouseAdapter {
 		String nombre= tabla.getValueAt(count, 0).toString();//columna
 	
 		
+		String queOperacion=oepracion();
 		
-		
-		if(oepracion().equals(NombreFijo.Eliminar)) {
+		if(queOperacion.equals(NombreFijo.Eliminar)) {
 			
 			//eliminar fila
 			modelocesta.removeRow(count);
 			
 			// sumar los precio de la cesta
 			ventana.getTotal().setText(String.valueOf(sumaTotal()));
-		}else {
+			
+			
+		}else if(queOperacion.equals(NombreFijo.Modificar_Cantidad)){
 			
 			
 			String cantidad=ModificarCantidad(nombre);
@@ -72,8 +74,15 @@ public class EventoTablaCesta extends MouseAdapter {
 			    				 null, 
 			    				 operacion,
 			    				 operacion[0]);
-		
-				return res;
+	
+			    if(res!=null){ 
+			    	
+			    	return res;
+			    	
+			    }else {
+			    	
+			    	return "";
+			    }
 			}
 		
 		
