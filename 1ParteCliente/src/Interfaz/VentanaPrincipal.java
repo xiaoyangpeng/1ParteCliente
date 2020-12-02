@@ -61,6 +61,9 @@ public class VentanaPrincipal extends JFrame {
 		 
 		panelentra.getEntrar().addActionListener(eventoentra);
 		
+		
+	
+		
 	}
 
 }

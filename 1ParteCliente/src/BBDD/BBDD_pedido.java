@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.text.TabableView;
 import javax.swing.undo.CannotUndoException;
 
 import ValorFijo.BBDD;
@@ -90,18 +91,18 @@ public boolean buscarSienviado(int valor) {
 	}
 	
 
-	public void Crear(){
+	public void Crear(String direccion){
 		
 
 		try {
 			
-		String sql=	" Insert into pedido(usuario,enviado) Values ( ?,false)";
+		String sql=	" Insert into pedido(usuario,enviado,Direccion) Values ( ?,false,?)";
 			
 		
 		tabla=conexion.prepareStatement(sql);
 		
 		tabla.setString(1, cuentaUsuario.cuenta);
-		
+		tabla.setString(2, direccion);
 		
 		tabla.execute();
 		

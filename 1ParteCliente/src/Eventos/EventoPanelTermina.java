@@ -50,29 +50,41 @@ public class EventoPanelTermina implements ActionListener{
 			// hya ninguna fina salta menaje de aviso error
 			if(ventana.getModelo().getRowCount()!=0) {
 				
-			ventana.getContentPane().setVisible(false);
-			panelterminad.setVisible(true);
-			ventana.setContentPane(panelterminad);
-			
-			
-			Pedido pide=new Pedido();
-			
-		
-			
-			// enviar el pedido
-			// luego en parte restaurante utiliza para verttificar 
-			pide.enviarPeido();
-			
-			 
-			// primero envia su comida que esta en cesta
-			pide.enviarComida(ventana.getModelo());
-			
-			
-			HiloBuscaSiEnvia busca=new HiloBuscaSiEnvia(ventana.getTextoTermina());
-			
-			busca.start();
-			
-			
+				
+				String direccion = JOptionPane.showInputDialog("Escribe tu direccion");
+				
+				
+				if(direccion!=null) {
+	
+						ventana.getContentPane().setVisible(false);
+						panelterminad.setVisible(true);
+						ventana.setContentPane(panelterminad);
+						
+						
+						Pedido pide=new Pedido();
+						
+						// enviar el pedido
+						// luego en parte restaurante utiliza para verttificar 
+						pide.enviarPeido(direccion);
+						
+						 
+						// primero envia su comida que esta en cesta
+						pide.enviarComida(ventana.getModelo());
+						
+						
+						
+						// un hilo no para de accerder tabla pedido para 
+						// buscar si el pedido ya ha sido enviado
+						HiloBuscaSiEnvia busca=new HiloBuscaSiEnvia(ventana.getTextoTermina());
+						
+						busca.start();
+						
+				}else {
+					JoPanelAviso.aviso("Cancelacion de enviar pedido");
+				}
+				
+				
+				
 			}else {
 				
 				JoPanelAviso.aviso("No has pedido nada");

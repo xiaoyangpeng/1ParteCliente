@@ -11,8 +11,10 @@ import Controlador.InicarModeloDeTabla;
 import Eventos.EventoPanelTermina;
 import Eventos.EventoTablaCesta;
 import Eventos.EventoVentanaPrincipal;
+import ValorFijo.Imagen;
 import ValorFijo.NombreFijo;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -41,8 +43,13 @@ public class Ventana_Usuario    extends JFrame {
 		
 		modelo=new DefaultTableModel(st,0);
 		
-		setBounds(100, 100, 742, 412);
+		setBounds(100, 100, 954, 412);
 		getContentPane().setLayout(null);
+		
+		
+		
+
+
 		
 		JPanel panelmedia = new JPanel();
 		panelmedia.setBounds(344, 10, 142, 355);
@@ -55,12 +62,12 @@ public class Ventana_Usuario    extends JFrame {
 		
 		Total = new JLabel("");
 		Total.setFont(new Font("宋体", Font.PLAIN, 26));
-		Total.setBounds(21, 196, 85, 45);
+		Total.setBounds(10, 242, 122, 45);
 		panelmedia.add(Total);
 		
 		JLabel lblTotal = new JLabel("Total");
 		lblTotal.setFont(new Font("宋体", Font.PLAIN, 24));
-		lblTotal.setBounds(31, 148, 74, 38);
+		lblTotal.setBounds(32, 194, 74, 38);
 		panelmedia.add(lblTotal);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -69,7 +76,7 @@ public class Ventana_Usuario    extends JFrame {
 		
 
 		JScrollPane scrollPaneCesta = new JScrollPane();
-		scrollPaneCesta.setBounds(493, 49, 225, 316);
+		scrollPaneCesta.setBounds(493, 49, 437, 316);
 		getContentPane().add(scrollPaneCesta);
 	
 		

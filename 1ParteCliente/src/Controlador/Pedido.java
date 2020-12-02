@@ -13,7 +13,7 @@ public class Pedido {
 	
 	
 	
-	public void enviarPeido(){
+	public void enviarPeido(String direccion){
 		
 		
 		BBDD_pedido pedido;
@@ -26,7 +26,7 @@ public class Pedido {
 			//como numero de pedido autoincrementa por tanto id actula es ultimo id + 1
 			IDPedidoActual.id=pedido.buscarultimoID()+1;
 			
-			pedido.Crear();
+			pedido.Crear(direccion);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
